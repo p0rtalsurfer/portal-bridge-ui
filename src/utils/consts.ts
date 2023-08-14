@@ -68,8 +68,6 @@ import { AptosNetwork } from "./aptos";
 import { getNetworkInfo, Network } from "@injectivelabs/networks";
 import { ChainId as InjectiveChainId } from "@injectivelabs/ts-types";
 import {
-  testnetConnection,
-  localnetConnection,
   Connection,
 } from "@mysten/sui.js";
 
@@ -802,10 +800,10 @@ export const getInjectiveNetworkChainId = () => {
 
 export const SUI_CONNECTION =
   CLUSTER === "mainnet"
-    ? new Connection({ fullnode: "https://rpc.mainnet.sui.io" })
+    ? new Connection({ fullnode: "https://fullnode.mainnet.sui.io:443" })
     : CLUSTER === "testnet"
-    ? testnetConnection
-    : localnetConnection;
+    ? new Connection({ fullnode: "https://fullnode.devnet.sui.io:443" })
+    : new Connection({ fullnode: "http://127.0.0.1:9000" });
 
 export const SUI_NATIVE_DECIMALS = 9;
 export const SUI_NATIVE_TOKEN_KEY = "0x2::sui::SUI";
